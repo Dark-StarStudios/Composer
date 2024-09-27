@@ -17,6 +17,18 @@
 
     use Symfony\Component\Dotenv\Dotenv;
 
+    use Monolog\Level;
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    // create a log channel
+    $log = new Logger('index');
+    $log->pushHandler(new StreamHandler('path/to/info.log', Level::Warning));
+
+    // add records to the log
+    // $log->warning('Dat werk');
+    // $log->error('Dat is nog steeds werk!');
+
     $dotenv = new Dotenv();
 
     // $dotenv = Dotenv::createImmutable(__DIR__.'../.env');
@@ -53,8 +65,10 @@
     
             $mail->send();
             echo 'Message has been sent';
+            $log->warning('Message has been sent');
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $log->error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }
     }
     ?>
