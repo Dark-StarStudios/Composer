@@ -1,5 +1,5 @@
 <?php
-    require '../vendor/autoload.php';
+    require '../klachtverwerking/vendor/autoload.php';
 
     $html = "<!DOCTYPE html>
     <html lang='en'>
